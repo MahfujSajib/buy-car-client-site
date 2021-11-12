@@ -21,10 +21,9 @@ const MakeAdmin = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                // if (data.modifiedCount) {
-                //     console.log(data);
-                //     setSuccess(true);
-                // }
+                if (data.modifiedCount) {
+                    setSuccess(true);
+                }
             })
 
         e.preventDefault()
@@ -41,7 +40,7 @@ const MakeAdmin = () => {
                     variant="standard" />
                 <Button type="submit" variant="contained">Make Admin</Button>
             </form>
-            {success && <Alert severity="success">Made Admin successfully!</Alert>}
+            {success && <Alert severity="success">Congrats...You are now Admin</Alert>}
         </div>
     );
 };

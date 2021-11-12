@@ -33,7 +33,7 @@ function Dashboard(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
     let { path, url } = useRouteMatch();
-    const { admin } = useAuth();
+    // const { admin } = useAuth();
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
@@ -46,11 +46,10 @@ function Dashboard(props) {
             <br />
             <Link style={{ textDecoration: 'none' }} to={`${url}`}><Button color="inherit">Dashboard</Button></Link>
 
-            <Link to={`${url}/makeAdmin`}><Button color="inherit">Make Admin</Button></Link>
+            <Link style={{ textDecoration: 'none' }} to={`${url}/makeAdmin`}>
+                <Button color="inherit">Make Admin</Button>
+            </Link>
 
-            {/* {admin && <Box>
-                <Link to={`${url}/makeAdmin`}><Button color="inherit">Make Admin</Button></Link>
-            </Box>} */}
             <List>
                 {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                     <ListItem button key={text}>
