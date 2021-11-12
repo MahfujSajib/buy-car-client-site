@@ -2,6 +2,7 @@ import { Button, Fade, Modal, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 const style = {
     position: 'absolute',
@@ -16,7 +17,10 @@ const style = {
 };
 
 const Purchase = ({ handlePurchaseClose, name, price, purchase }) => {
-    const [purchaseInfo, setPurchaseInfo] = useState();
+    const { user } = useAuth()
+    const { initialInfo } = { name: user.displayName, email: user.email, phone: '' }
+    const [purchaseInfo, setPurchaseInfo] = useState(initialInfo);
+
     const handleOnBlur = e => {
         const field = e.target.name;
         const value = e.target.value;
@@ -24,7 +28,29 @@ const Purchase = ({ handlePurchaseClose, name, price, purchase }) => {
         newInfo[field] = value;
         setPurchaseInfo(newInfo);
     }
-    const handleBookingSubmit = e => {
+    const handlePurchaseSubmit = e => {
+        const purchase = {
+            ...purchaseInfo,
+            Name: name,
+            displayName: user.displayName,
+            email: user.email,
+        }
+        // send to the server
+        fetch('http://localhost:5000/purchasedone', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(purchase)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                // if (data.insertedId) {
+                //     setBookingSuccess(true);
+                //     handleBookingClose();
+                // }
+            });
         e.preventDefault()
     }
 
@@ -44,12 +70,12 @@ const Purchase = ({ handlePurchaseClose, name, price, purchase }) => {
                     <Typography id="transition-modal-title" variant="h6" component="h2">
                         {name}
                     </Typography>
-                    <form onSubmit={handleBookingSubmit}>
+                    <form onSubmit={handlePurchaseSubmit}>
                         <TextField
                             sx={{ width: '90%', m: 1 }}
                             id="outlined-size-small"
-                            name="Name"
-                            defaultValue="Your Name"
+                            name="displayName"
+                            defaultValue={user.displayName}
                             onBlur={handleOnBlur}
                             size="small"
                         />
@@ -57,7 +83,7 @@ const Purchase = ({ handlePurchaseClose, name, price, purchase }) => {
                             sx={{ width: '90%', m: 1 }}
                             id="outlined-size-small"
                             name="email"
-                            defaultValue="email"
+                            defaultValue={user.email}
                             onBlur={handleOnBlur}
                             size="small"
                         />
@@ -77,18 +103,16 @@ const Purchase = ({ handlePurchaseClose, name, price, purchase }) => {
                             defaultValue="Car id"
                             size="small"
                         />
-                        <Link to='/purchasedone' style={{ textDecoration: 'none' }}>
-                            <Button
-                                type="submit"
-                                sx={{
-                                    backgroundColor: 'black', marginTop: 5, color: '#fff',
-                                    '&:hover': {
-                                        color: 'black',
-                                    },
-                                }}
-                            >Purchase Now
-                            </Button>
-                        </Link>
+                        <Button
+                            type="submit"
+                            sx={{
+                                backgroundColor: 'black', marginTop: 5, color: '#fff',
+                                '&:hover': {
+                                    color: 'black',
+                                },
+                            }}
+                        >Purchase Now
+                        </Button>
                     </form>
                 </Box>
             </Fade>

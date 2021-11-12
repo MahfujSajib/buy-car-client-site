@@ -18,7 +18,7 @@ const Product = (props) => {
                 <Typography variant="h6" display="block" gutterBottom>
                     {price}
                 </Typography>
-                <Link to='/login' style={{ textDecoration: 'none' }}>
+                <Link to='/carlists' style={{ textDecoration: 'none' }}>
                     <Button sx={{
                         backgroundColor: 'black', marginTop: 5, color: '#fff',
                         '&:hover': {

@@ -1,17 +1,83 @@
 import React from 'react';
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
 import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 
 const Header = () => {
-    const { user, logOut } = useAuth()
+    const { user, logOut } = useAuth();
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Container>
+                <Navbar.Brand href="#home">CAR HUB</Navbar.Brand>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse id="responsive-navbar-nav">
+                    <Nav className="mx-auto">
+                        <Typography
+                            variant="h6"
+                            component="div"
+                            sx={{ flexGrow: 1 }}
+
+                        >
+                            <Link
+                                style={{ textDecoration: 'none', color: 'white', margin: 20 }}
+                                to='/home'>
+                                Home
+                            </Link>
+                            <Link
+                                style={{ textDecoration: 'none', color: 'white', margin: 20 }}
+                                to='/aboutus'>
+                                About Us
+                            </Link>
+                            <Link
+                                style={{ textDecoration: 'none', color: 'white', margin: 20 }}
+                                to='/carlists'>
+                                Car List
+                            </Link>
+                            <Link
+                                style={{ textDecoration: 'none', color: 'white', margin: 20 }}
+                                to='/contact'>
+                                Contact
+                            </Link>
+                        </Typography>
+                        {
+                            user?.email ?
+                                <Box>
+                                    <Link style={{ textDecoration: 'none', color: 'white' }} to='/dashboard'>
+                                        <Button style={{ color: 'white' }}>Dashboard</Button>
+                                    </Link>
+                                    <Button onClick={logOut} style={{ color: 'white' }}>Logout</Button>
+                                </Box>
+
+                                :
+                                <Link style={{ textDecoration: 'none', color: 'white' }} to="/login">
+                                    <Button color="inherit">Login</Button>
+                                </Link>
+                        }
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
+    );
+};
+
+export default Header;
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/* <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar>
                     <IconButton
@@ -65,11 +131,28 @@ const Header = () => {
                     }
                 </Toolbar>
             </AppBar>
-        </Box>
-    );
-};
+        </Box> */}
 
-export default Header;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -24,6 +24,7 @@ const useFirebase = () => {
                 setAuthError('')
                 const newUser = { email, displayName: name };
                 setUser(newUser);
+                saveUser(email, name, 'POST')
 
                 updateProfile(auth.currentUser, {
                     displayName: name
@@ -49,6 +50,19 @@ const useFirebase = () => {
             setIsloading(false);
         });
     }, []);
+
+    const saveUser = (email, displayName, method) => {
+        const users = { email, displayName };
+
+        fetch('http://localhost:5000/users', {
+            method: method,
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(users)
+        })
+            .then()
+    }
 
     // USER LOGIN
     const loginUser = (email, password, location, history) => {
@@ -86,5 +100,6 @@ const useFirebase = () => {
         loginUser,
     }
 }
+
 
 export default useFirebase;
