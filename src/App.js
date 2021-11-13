@@ -18,6 +18,8 @@ import PrivateRoute from './pages/PrivateRoute/PrivateRoute';
 import Purchase from './pages/Purchase/Purchase';
 import PurchaseDone from './pages/Purchase/PurchaseDone';
 import Dashboard from './pages/Dashboard/Dashboard/Dashboard';
+import AddCar from './pages/Dashboard/AddCar/AddCar';
+import Purchased from './pages/Purchase/Purchased/Purchased';
 
 function App() {
   return (
@@ -41,8 +43,14 @@ function App() {
             <PrivateRoute path="/dashboard">
               <Dashboard></Dashboard>
             </PrivateRoute>
+            <PrivateRoute path="/addcar">
+              <AddCar></AddCar>
+            </PrivateRoute>
             <Route path="/contact">
               <Contact></Contact>
+            </Route>
+            <Route path="/purchased">
+              <Purchased></Purchased>
             </Route>
             <Route path="/purchasedone">
               <PurchaseDone></PurchaseDone>
@@ -54,7 +62,6 @@ function App() {
               <Register></Register>
             </Route>
           </Switch>
-          <Footer></Footer>
         </Router>
       </AuthProvider>
 

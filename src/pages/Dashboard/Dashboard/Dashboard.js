@@ -31,6 +31,7 @@ const drawerWidth = 200;
 
 function Dashboard(props) {
     const { window } = props;
+    const { logOut } = useAuth();
     const [mobileOpen, setMobileOpen] = React.useState(false);
     let { path, url } = useRouteMatch();
     // const { admin } = useAuth();
@@ -49,18 +50,15 @@ function Dashboard(props) {
             <Link style={{ textDecoration: 'none' }} to={`${url}/makeAdmin`}>
                 <Button color="inherit">Make Admin</Button>
             </Link>
-
-            <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>
-                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                        </ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-            </List>
-        </div>
+            <br />
+            <Link style={{ textDecoration: 'none' }} to={'/login'}>
+                < Button onClick={logOut} color="inherit">Logout</Button>
+            </Link>
+            <br />
+            <Link style={{ textDecoration: 'none' }} to={'/addcar'}>
+                < Button color="inherit">Add New Car</Button>
+            </Link>
+        </div >
     );
 
     const container = window !== undefined ? () => window().document.body : undefined;

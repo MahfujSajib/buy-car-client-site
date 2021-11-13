@@ -16,9 +16,9 @@ const style = {
     p: 4,
 };
 
-const Purchase = ({ handlePurchaseClose, name, price, purchase }) => {
+const Purchase = ({ handlePurchaseClose, name, price, purchase, id }) => {
     const { user } = useAuth()
-    const { initialInfo } = { name: user.displayName, email: user.email, phone: '' }
+    const { initialInfo } = { name: user.displayName, price: user.price, email: user.email, phone: '' }
     const [purchaseInfo, setPurchaseInfo] = useState(initialInfo);
 
     const handleOnBlur = e => {
@@ -34,6 +34,7 @@ const Purchase = ({ handlePurchaseClose, name, price, purchase }) => {
             Name: name,
             displayName: user.displayName,
             email: user.email,
+            price: user.price
         }
         // send to the server
         fetch('http://localhost:5000/purchasedone', {
@@ -98,21 +99,31 @@ const Purchase = ({ handlePurchaseClose, name, price, purchase }) => {
                         <TextField
                             sx={{ width: '90%', m: 1 }}
                             id="outlined-size-small"
+                            name="price"
+                            onBlur={handleOnBlur}
+                            defaultValue="price"
+                            size="small"
+                        />
+                        <TextField
+                            sx={{ width: '90%', m: 1 }}
+                            id="outlined-size-small"
                             name="Car Id"
                             onBlur={handleOnBlur}
                             defaultValue="Car id"
                             size="small"
                         />
-                        <Button
-                            type="submit"
-                            sx={{
-                                backgroundColor: 'black', marginTop: 5, color: '#fff',
-                                '&:hover': {
-                                    color: 'black',
-                                },
-                            }}
-                        >Purchase Now
-                        </Button>
+                        <Link to='/purchased' style={{ textDecoration: 'none' }}>
+                            <Button
+                                type="submit"
+                                sx={{
+                                    backgroundColor: 'black', marginTop: 5, color: '#fff',
+                                    '&:hover': {
+                                        color: 'black',
+                                    },
+                                }}
+                            >Purchase Now
+                            </Button>
+                        </Link>
                     </form>
                 </Box>
             </Fade>

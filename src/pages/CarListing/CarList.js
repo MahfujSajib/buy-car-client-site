@@ -2,14 +2,16 @@ import { Button, Grid, Paper, Typography } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Purchase from '../Purchase/Purchase'
+import Purchased from '../Purchase/Purchased/Purchased';
 
 const CarList = (props) => {
-    const { name, img, price } = props.carList;
+    const { id, name, img, price } = props.carList;
     const [purchase, setPurchase] = React.useState(false);
     const handlePurchase = () => setPurchase(true);
     const handlePurchaseClose = () => setPurchase(false);
     return (
         <>
+
             <Grid item xs={12} sm={6} md={4} sx={{ marginTop: 5 }}>
                 <Paper elevation={3} sx={{ py: 5 }}>
                     <img src={img} alt="" />
@@ -28,6 +30,7 @@ const CarList = (props) => {
                 </Paper>
             </Grid >
             <Purchase
+                id={id}
                 name={name}
                 price={price}
                 purchase={purchase}
