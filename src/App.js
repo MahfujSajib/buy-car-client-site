@@ -20,6 +20,7 @@ import PurchaseDone from './pages/Purchase/PurchaseDone';
 import Dashboard from './pages/Dashboard/Dashboard/Dashboard';
 import AddCar from './pages/Dashboard/AddCar/AddCar';
 import Purchased from './pages/Purchase/Purchased/Purchased';
+import MyPayment from './pages/Dashboard/MyPayment/MyPayment';
 
 function App() {
   return (
@@ -54,6 +55,9 @@ function App() {
             </Route>
             <Route path="/purchasedone">
               <PurchaseDone></PurchaseDone>
+            </Route>
+            <Route path="/mypayment">
+              <MyPayment></MyPayment>
             </Route>
             <Route path="/login">
               <Login></Login>
